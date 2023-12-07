@@ -2,8 +2,8 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
-import Auth from "../pages/Auth/Auth";
-import User from "../pages/User/User";
+import Login from "../pages/Login/Login";
+import Profile from "../pages/Profile/Profile";
 import Error404 from "../pages/Error404";
 
 const AppRouter = () => {
@@ -11,8 +11,8 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

@@ -3,16 +3,17 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import fetchApi from "../../services/fetchAPI";
-import styles from "./AuthCard.module.css";
+import styles from "./LoginCard.module.css";
 
 import { useDispatch } from "react-redux";
 import { setToken } from "../../state/auth/authSlice";
 import { setUserProfile } from "../../state/user/userSlice";
 
-const AuthCard = () => {
+const LoginCard = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState(null); // Nouvel état pour gérer les erreurs
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,12 +23,19 @@ const AuthCard = () => {
 
     try {
       const result = await fetchApi.login(username, password);
-      const profileResult = await fetchApi.getProfile(result.body.token);
-      console.log(result);
-      console.log(profileResult);
-      dispatch(setToken(result.body.token));
-      dispatch(setUserProfile(profileResult.body));
-      navigate("/user");
+
+      if (result.status === 200) {
+        setError(null);
+        const profileResult = await fetchApi.getProfile(result.body.token);
+        console.log(result);
+        console.log(profileResult);
+        dispatch(setToken(result.body.token));
+        dispatch(setUserProfile(profileResult.body));
+        navigate("/profile");
+      } else {
+        console.error("Error during sign-in:", result);
+        setError(result.message);
+      }
     } catch (error) {
       console.error("Error during sign-in:", error);
     }
@@ -70,9 +78,10 @@ const AuthCard = () => {
         <button type="submit" className={styles["sign-in-button"]}>
           Sign In
         </button>
+        {error && <p className={styles["error-message"]}>{error}</p>}
       </form>
     </section>
   );
 };
 
-export default AuthCard;
+export default LoginCard;

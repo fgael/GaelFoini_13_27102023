@@ -30,6 +30,7 @@ const userSlice = createSlice({
   },
 });
 
+// actions
 export const { setUserProfile, clearUserProfile } = userSlice.actions;
 export const selectUserProfile = (state) => state.user;
 

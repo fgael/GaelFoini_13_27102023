@@ -1,5 +1,5 @@
 import Header from "../../components/Header/Header";
-import AuthCard from "../../components/AuthCard/AuthCard";
+import LoginCard from "../../components/LoginCard/LoginCard";
 import Footer from "../../components/Footer/Footer";
 
 const Index = () => {
@@ -7,7 +7,7 @@ const Index = () => {
     <>
       <Header />
       <main className="main bg-dark">
-        <AuthCard />
+        <LoginCard />
       </main>
       <Footer />
     </>

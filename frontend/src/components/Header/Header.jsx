@@ -40,21 +40,23 @@ const Nav = () => {
       <div>
         {isAuthenticated ? (
           <>
-            <Link to="/user" className={styles["main-nav-item"]}>
-              <i>
-                <FontAwesomeIcon icon={faUserCircle} />
-              </i>
-              {userProfile.firstName}
-            </Link>
-            <div onClick={handleLogout} className={styles["main-nav-item"]}>
-              <i>
-                <FontAwesomeIcon icon={faSignOutAlt} />
-              </i>
-              Sign out
+            <div className={styles["main-nav-log"]}>
+              <Link to="/profile" className={styles["main-nav-item"]}>
+                <i>
+                  <FontAwesomeIcon icon={faUserCircle} />
+                </i>
+                {userProfile.firstName}
+              </Link>
+              <div onClick={handleLogout} className={styles["main-nav-item"]}>
+                <i>
+                  <FontAwesomeIcon icon={faSignOutAlt} />
+                </i>
+                Sign out
+              </div>
             </div>
           </>
         ) : (
-          <Link to="/auth" className={styles["main-nav-item"]}>
+          <Link to="/login" className={styles["main-nav-item"]}>
             <i>
               <FontAwesomeIcon icon={faUserCircle} />
             </i>
