@@ -1,0 +1,3 @@
+[submodule "Project-10-Bank-API"]
+	path = Project-10-Bank-API
+	url = https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API.git
