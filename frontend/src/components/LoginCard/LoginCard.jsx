@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import fetchApi from "../../services/fetchAPI";
 import styles from "./LoginCard.module.css";
 
+import Cookies from "js-cookie";
+
 import { useDispatch } from "react-redux";
 import { setToken } from "../../state/auth/authSlice";
 import { setUserProfile } from "../../state/user/userSlice";
@@ -13,7 +15,7 @@ const LoginCard = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState(null); // Nouvel état pour gérer les erreurs
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,6 +31,15 @@ const LoginCard = () => {
         const profileResult = await fetchApi.getProfile(result.body.token);
         console.log(result);
         console.log(profileResult);
+
+        if (rememberMe) {
+          Cookies.set("jwtToken", result.body.token, {
+            expires: 1,
+            secure: true,
+            sameSite: "Strict",
+          });
+        }
+
         dispatch(setToken(result.body.token));
         dispatch(setUserProfile(profileResult.body));
         navigate("/profile");

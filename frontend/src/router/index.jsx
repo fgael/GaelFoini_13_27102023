@@ -11,7 +11,7 @@ const PrivateRoute = ({ element }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   return element;

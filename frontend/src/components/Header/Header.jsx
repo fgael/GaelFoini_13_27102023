@@ -12,6 +12,8 @@ import {
 } from "../../state/user/userSlice";
 import { clearToken } from "../../state/auth/authSlice";
 
+import Cookies from "js-cookie";
+
 import styles from "./Header.module.css";
 
 const Nav = () => {
@@ -19,10 +21,11 @@ const Nav = () => {
   const navigate = useNavigate();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const userProfile = useSelector(selectUserProfile);
-  console.log(userProfile);
+
   const handleLogout = () => {
     dispatch(clearToken());
     dispatch(clearUserProfile());
+    Cookies.remove("jwtToken");
     navigate("/");
     console.log("User logged out");
   };
