@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "./state/auth/authSlice";
 import { setUserProfile } from "./state/user/userSlice";
-import fetchApi from "./services/fetchAPI";
+import fetchAPI from "./services/fetchAPI.js";
 import Cookies from "js-cookie";
 import AppRouter from "./router/index";
 
@@ -17,7 +17,7 @@ const App = () => {
       if (authToken) {
         try {
           dispatch(setToken(authToken));
-          const profileResult = await fetchApi.getProfile(authToken);
+          const profileResult = await fetchAPI.getProfile(authToken);
           dispatch(setUserProfile(profileResult.body));
           setLoading(false);
         } catch (error) {

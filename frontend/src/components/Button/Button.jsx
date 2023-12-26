@@ -1,19 +1,17 @@
 import PropTypes from "prop-types";
-import styles from "./Button.module.css";
 
-const Button = ({ className, text }) => {
-  const buttonClassName = `${styles.button} ${className}`;
+const Button = ({ onClick, label, className }) => {
   return (
-    <button className={buttonClassName} type="button">
-      {text}
+    <button className={className} onClick={onClick}>
+      {label}
     </button>
   );
 };
 
 Button.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-  text: PropTypes.string, // Nouvelle prop pour le contenu textuel du bouton
+  className: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  label: PropTypes.string.isRequired,
 };
 
 export default Button;

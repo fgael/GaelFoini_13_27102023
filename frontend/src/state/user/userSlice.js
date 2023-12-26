@@ -1,3 +1,4 @@
+// userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
@@ -17,6 +18,12 @@ const userSlice = createSlice({
         ...action.payload,
       };
     },
+    updateUserProfile: (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
     clearUserProfile: () => {
       return {
         email: "",
@@ -31,7 +38,8 @@ const userSlice = createSlice({
 });
 
 // actions
-export const { setUserProfile, clearUserProfile } = userSlice.actions;
+export const { setUserProfile, updateUserProfile, clearUserProfile } =
+  userSlice.actions;
 export const selectUserProfile = (state) => state.user;
 
 export default userSlice.reducer;

@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3001/api/v1";
 
-const fetchApi = {
+const fetchAPI = {
   login: async (email, password) => {
     const response = await fetch(`${BASE_URL}/user/login`, {
       method: "POST",
@@ -51,4 +51,4 @@ const fetchApi = {
   },
 };
 
-export default fetchApi;
+export default fetchAPI;

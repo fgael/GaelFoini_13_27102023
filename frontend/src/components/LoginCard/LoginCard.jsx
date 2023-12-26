@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import fetchApi from "../../services/fetchAPI";
+import fetchAPI from "../../services/fetchAPI";
 import styles from "./LoginCard.module.css";
+
+import Button from "../../components/Button/Button";
 
 import Cookies from "js-cookie";
 
@@ -24,11 +26,11 @@ const LoginCard = () => {
     e.preventDefault();
 
     try {
-      const result = await fetchApi.login(username, password);
+      const result = await fetchAPI.login(username, password);
 
       if (result.status === 200) {
         setError(null);
-        const profileResult = await fetchApi.getProfile(result.body.token);
+        const profileResult = await fetchAPI.getProfile(result.body.token);
         console.log(result);
         console.log(profileResult);
 
@@ -86,9 +88,11 @@ const LoginCard = () => {
           />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        <button type="submit" className={styles["sign-in-button"]}>
-          Sign In
-        </button>
+        <Button
+          type="submit"
+          label="Sign In"
+          className={styles["sign-in-button"]}
+        />
         {error && <p className={styles["error-message"]}>{error}</p>}
       </form>
     </section>
