@@ -1,17 +1,18 @@
 import Header from "../../components/Header/Header";
-import LoginCard from "../../components/LoginCard/LoginCard";
 import Footer from "../../components/Footer/Footer";
 
-const Login = () => {
+import styles from "../Error404/Error404.module.css";
+
+const Error404 = () => {
   return (
     <>
       <Header />
-      <main className="main bg-dark">
-        <LoginCard />
+      <main className={styles["main-container"]}>
+        <h1>Error 404</h1>
       </main>
       <Footer />
     </>
   );
 };
 
-export default Login;
+export default Error404;

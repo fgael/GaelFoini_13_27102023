@@ -3,7 +3,7 @@ import Hero from "../../components/Hero/Hero";
 import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 
-const Index = () => {
+const Home = () => {
   return (
     <>
       <Header />
@@ -16,4 +16,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;

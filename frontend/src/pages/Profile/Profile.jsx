@@ -14,7 +14,7 @@ import { selectToken } from "../../state/auth/authSlice";
 import styles from "../Profile/Profile.module.css";
 import fetchAPI from "../../services/fetchAPI";
 
-const Index = () => {
+const Profile = () => {
   const dispatch = useDispatch();
   const userProfile = useSelector(selectUserProfile);
   const token = useSelector(selectToken);
@@ -149,4 +149,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Profile;
