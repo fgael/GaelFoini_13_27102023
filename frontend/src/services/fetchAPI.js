@@ -1,6 +1,8 @@
+// Base URL for the API
 const BASE_URL = "http://localhost:3001/api/v1";
 
 const fetchAPI = {
+  // Function for user login
   login: async (email, password) => {
     const response = await fetch(`${BASE_URL}/user/login`, {
       method: "POST",
@@ -13,6 +15,7 @@ const fetchAPI = {
     return response.json();
   },
 
+  // Function for user signup
   signup: async (email, password, firstName, lastName) => {
     const response = await fetch(`${BASE_URL}/user/signup`, {
       method: "POST",
@@ -25,6 +28,7 @@ const fetchAPI = {
     return response.json();
   },
 
+  // Function to get user profile information
   getProfile: async (token) => {
     const response = await fetch(`${BASE_URL}/user/profile`, {
       method: "POST",
@@ -37,6 +41,7 @@ const fetchAPI = {
     return response.json();
   },
 
+  // Function to update user profile information
   updateProfile: async (token, { firstName, lastName }) => {
     const response = await fetch(`${BASE_URL}/user/profile`, {
       method: "PUT",

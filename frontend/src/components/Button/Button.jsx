@@ -8,6 +8,7 @@ const Button = ({ onClick, label, className }) => {
   );
 };
 
+// PropTypes to define the expected types for each prop
 Button.propTypes = {
   className: PropTypes.string.isRequired,
   onClick: PropTypes.func,

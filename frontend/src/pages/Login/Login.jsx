@@ -6,6 +6,7 @@ const Login = () => {
   return (
     <>
       <Header />
+      {/* global-css-style */}
       <main className="main bg-dark">
         <LoginCard />
       </main>

@@ -1,8 +1,4 @@
 import { useState } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import Button from "../../components/Button/Button";
-import AccountCard from "../../components/AccountCard/AccountCard";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,47 +7,71 @@ import {
 } from "../../state/user/userSlice";
 import { selectToken } from "../../state/auth/authSlice";
 
-import styles from "../Profile/Profile.module.css";
 import fetchAPI from "../../services/fetchAPI";
 
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import Button from "../../components/Button/Button";
+import AccountCard from "../../components/AccountCard/AccountCard";
+
+import styles from "../Profile/Profile.module.css";
+
 const Profile = () => {
+  // Initializing Redux dispatch and selecting state from the store
   const dispatch = useDispatch();
   const userProfile = useSelector(selectUserProfile);
   const token = useSelector(selectToken);
 
+  // Setting up state for edited first and last names
   const [editedFirstName, setEditedFirstName] = useState(userProfile.firstName);
   const [editedLastName, setEditedLastName] = useState(userProfile.lastName);
 
+  // State for tracking the edit mode
   const [isEditMode, setIsEditMode] = useState(false);
 
+  // Event handlers for input changes
   const handleFirstNameChange = (e) => setEditedFirstName(e.target.value);
   const handleLastNameChange = (e) => setEditedLastName(e.target.value);
 
+  // Handler for entering edit mode
   const handleEdit = () => {
     setIsEditMode(true);
   };
 
+  // Keyboard "enter" handler for saving changes
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSave();
     }
   };
 
+  // Handler for canceling edits
+  const handleCancel = () => {
+    setEditedFirstName(userProfile.firstName);
+    setEditedLastName(userProfile.lastName);
+
+    setIsEditMode(false);
+  };
+
   const handleSave = async () => {
+    // Checking if names have been changed
     const isFirstNameChanged = editedFirstName !== userProfile.firstName;
     const isLastNameChanged = editedLastName !== userProfile.lastName;
 
+    // If no changes, exit edit mode
     if (!isFirstNameChanged && !isLastNameChanged) {
       setIsEditMode(false);
       return;
     }
 
     try {
+      // Updating user profile via API call
       const response = await fetchAPI.updateProfile(token, {
         firstName: editedFirstName,
         lastName: editedLastName,
       });
 
+      // If successful response, update state and exit edit mode
       if (response) {
         dispatch(
           updateUserProfile({
@@ -65,15 +85,9 @@ const Profile = () => {
         setIsEditMode(false);
       }
     } catch (error) {
+      // Log error if update fails
       console.error("Error while updating profile", error);
     }
-  };
-
-  const handleCancel = () => {
-    setEditedFirstName(userProfile.firstName);
-    setEditedLastName(userProfile.lastName);
-
-    setIsEditMode(false);
   };
 
   return (
